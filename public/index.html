@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="center">
+
+<h2>Stock Broker Portal</h2>
+
+<input id="email" type="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="registerUser()">Register</button>
+<button onclick="loginUser()">Login</button>
+
+<p id="msg"></p>
+
+<script>
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const msg = document.getElementById('msg');
+
+async function registerUser() {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!email || !password) {
+        msg.innerText = "Fill all fields";
+        return;
+    }
+
+    const res = await fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+    msg.innerText = data.msg;
+}
+
+async function loginUser() {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!email || !password) {
+        msg.innerText = "Fill all fields";
+        return;
+    }
+
+    const res = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+        localStorage.setItem('user', email);
+        window.location.href = 'dashboard.html';
+    } else {
+        msg.innerText = data.msg;
+    }
+}
+</script>
+
+</body>
+</html>

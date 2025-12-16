@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="top-bar">
+    <span id="user"></span>
+    <button onclick="toggleTheme()">Theme</button>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<h3>Available Stocks</h3>
+<div id="stocks"></div>
+
+<h3>Your Subscriptions</h3>
+<ul id="subscribed"></ul>
+
+<h3>Live Stock Chart</h3>
+<canvas id="stockChart" width="600" height="300"></canvas>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="client.js"></script>
+
+</body>
+</html>
